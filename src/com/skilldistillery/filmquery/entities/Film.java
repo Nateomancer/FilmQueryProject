@@ -13,21 +13,23 @@ public class Film {
 	
 	
 
-	// list of the movie cast
-	private List<Actor> cast;
+	
+	
 
 	// film table
-	private int id;// Primary Key
+	private int id;// Primary Key //foreign key in actor and language tables
 	private String title;
 	private String description;
 	private Integer releaseYear;
-	private int languageId; // Forgein key in film table. //Primary in language table
+	private int languageId; // Foreign key in film table. //Primary in language table
 	private int rentalDuration;
 	private double rentalRate;
 	private Integer length;
 	private double replacementCost;
 	private String rating;
 	private String features;
+	private List<Actor> cast;//from actor table
+	private String filmLanguage;//from language table
 	
 
 	// Default constructor
@@ -36,15 +38,14 @@ public class Film {
 	}
 
 	// Primary constructor
-	/*List<Actor> actors*/
-	public Film( int id, String title, String description, int releaseYear, int languageId,
-			int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features, List<Actor> cast) {
+	public Film(int id, String title, String description, Integer releaseYear, int languageId, int rentalDuration,
+			double rentalRate, Integer length, double replacementCost, String rating, String features, List<Actor> cast,
+			String filmLanguage) {
 		super();
-		//this.actors = actors;
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.releaseYear = (int) releaseYear;
+		this.releaseYear = releaseYear;
 		this.languageId = languageId;
 		this.rentalDuration = rentalDuration;
 		this.rentalRate = rentalRate;
@@ -52,57 +53,8 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.features = features;
-		this.cast=cast;
-	}
-	
-	
-	
-	
-//TOSTRING
-	
-	
-	@Override
-	public String toString() {
-		return "Film [cast=" + cast + ", id=" + id + ", title=" + title + ", description=" + description
-				+ ", releaseYear=" + releaseYear + ", languageId=" + languageId + ", rentalDuration=" + rentalDuration
-				+ ", rentalRate=" + rentalRate + ", length=" + length + ", replacementCost=" + replacementCost
-				+ ", rating=" + rating + ", features=" + features + "]";
-	}
-	
-//HASHCODE
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cast, description, features, id, languageId, length, rating, releaseYear, rentalDuration,
-				rentalRate, replacementCost, title);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Film other = (Film) obj;
-		return Objects.equals(cast, other.cast) && Objects.equals(description, other.description)
-				&& Objects.equals(features, other.features) && id == other.id && languageId == other.languageId
-				&& Objects.equals(length, other.length) && Objects.equals(rating, other.rating)
-				&& Objects.equals(releaseYear, other.releaseYear) && rentalDuration == other.rentalDuration
-				&& Double.doubleToLongBits(rentalRate) == Double.doubleToLongBits(other.rentalRate)
-				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)
-				&& Objects.equals(title, other.title);
-	}
-	
-	//GETTERS AND SETTERS
-
-	public List<Actor> getCast() {
-		return cast;
-	}
-
-	public void setCast(List<Actor> cast) {
 		this.cast = cast;
+		this.filmLanguage = filmLanguage;
 	}
 
 	public int getId() {
@@ -192,6 +144,65 @@ public class Film {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
+
+	public List<Actor> getCast() {
+		return cast;
+	}
+
+	public void setCast(List<Actor> cast) {
+		this.cast = cast;
+	}
+
+	public String getFilmLanguage() {
+		return filmLanguage;
+	}
+
+	public void setFilmLanguage(String filmLanguage) {
+		this.filmLanguage = filmLanguage;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cast, description, features, filmLanguage, id, languageId, length, rating, releaseYear,
+				rentalDuration, rentalRate, replacementCost, title);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Film other = (Film) obj;
+		return Objects.equals(cast, other.cast) && Objects.equals(description, other.description)
+				&& Objects.equals(features, other.features) && Objects.equals(filmLanguage, other.filmLanguage)
+				&& id == other.id && languageId == other.languageId && Objects.equals(length, other.length)
+				&& Objects.equals(rating, other.rating) && Objects.equals(releaseYear, other.releaseYear)
+				&& rentalDuration == other.rentalDuration
+				&& Double.doubleToLongBits(rentalRate) == Double.doubleToLongBits(other.rentalRate)
+				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)
+				&& Objects.equals(title, other.title);
+	}
+
+	@Override
+	public String toString() {
+		return "[Film ID]" + id + " [Title] " + title + " [Description] " + description + " [ReleaseYear] " + releaseYear
+				+ " [Language Id] " + languageId + ", [rentalDuration]" + rentalDuration + ", [Rental Rate] " + rentalRate
+				+ " [Length] " + length + " [Replacement Cost]" + replacementCost + ", [Rating] " + rating + " [Features] "
+				+ features + " [Cast]" + cast + " [filmLanguage] " + filmLanguage;
+	}
+
+
+	
+
+	
+
+	
+	
+	
+	
 
 	
 	

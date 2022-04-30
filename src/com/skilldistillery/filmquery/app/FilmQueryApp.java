@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -37,10 +38,14 @@ public class FilmQueryApp {
 
 	private void startUserInterface(Scanner input) throws SQLException {
 
+//	***CHECK FOR NULL FIELDS***
+
 //	  User Story 1 DONE
 //	  User Story 2 DONE
-//	  User Story 3
-		
+//	  User Story 3 DONEish
+//	  User Story 4 		
+//	  User Story 5
+
 		boolean menu = true;
 		while (menu == true) {
 
@@ -60,15 +65,46 @@ public class FilmQueryApp {
 				input.nextLine();
 				int filmId = input.nextInt();
 				Film film = null;
-
+				
+				//checks user input
 				if (filmId > 0) {
+					
 					film = db.findFilmById(filmId);
-					System.out.println("1...\n2...\n3... \nQuery Succesful.\n");
-					System.out.println("TITLE: " + film.getTitle() + "\nRELEASE YEAR: " + film.getReleaseYear()
-							+ "\nRating: " + film.getRating() + "\nDESCRIPTION: " + film.getDescription() + "\n");
-					;
-				} else
-					System.out.println("Query matched no results");
+					
+					//checks if film is null
+					if (film != null) {
+					
+						System.out.println("1...\n2...\n3... \nQuery Succesful.\n");
+
+						// print the film title, year, rating, and description
+						System.out.println("TITLE: " + film.getTitle() + "\nRELEASE YEAR: " + film.getReleaseYear()
+								+ "\nRating: " + film.getRating() + "\nDESCRIPTION: " + film.getDescription() + "\n");
+
+						// print the language
+						System.out.println("FILM LANGUAGE: " + film.getFilmLanguage());
+
+						// print the cast
+						System.out.println("FILM CAST:");
+						for (Actor actor : film.getCast()) {
+
+							System.out.println(actor);
+
+						}
+						
+						System.out.println("");
+
+					
+					} else if (film == null) {
+						System.out.println("OOPS, I nulled again,\n"
+								+ "I played with your code, got lost in queries\n"
+								+ "Oh user, You think I have everything\n"
+								+ "But I'm not always acurate"
+								+ "NO RESULT FOUND");
+					}
+				}else {
+					
+					System.out.println("CRUD! That was an invalid input");
+				}
 				break;
 
 			case 2:
@@ -81,13 +117,12 @@ public class FilmQueryApp {
 				input.nextLine();
 				String keyword = input.next();
 				System.out.println(keyword);
-			
+
 				System.out.println("Printing Results...");
 				db.findFilmByKeyword(keyword);
-				//filmResults.addAll();
-				//System.out.println(filmResults.size());
-				
-				
+				// filmResults.addAll();
+				// System.out.println(filmResults.size());
+
 //				for (Film films : filmResults) {
 //
 //					System.out.println(films.toString());
@@ -122,16 +157,16 @@ public class FilmQueryApp {
 	}
 
 	private int getUserInput(Scanner input) {
-		
-		Scanner input3=input;
+
+		Scanner input3 = input;
 		int userMenuSelection;
-		
+
 		try {
 			userMenuSelection = input3.nextInt();
 			if (userMenuSelection > 3 || userMenuSelection < 1) {
 
 				input.nextLine();
-				System.out.println("CRUD! That was an invalid Input \nPlease select an option from the menu");
+				System.out.println("CRUD! That was an invalid Input");
 				return userMenuSelection = 0;
 
 			}
@@ -139,7 +174,7 @@ public class FilmQueryApp {
 
 		catch (InputMismatchException e) {
 			input.nextLine();
-			System.out.println("CRUD! That was an invalid input \nPlease select an option from the menu");
+			System.out.println("CRUD! That was an invalid input");
 			return userMenuSelection = 0;
 
 		}
