@@ -3,4 +3,4 @@
 ## Description
 //what this project does
 
-##Technolgies used
+##Technologies used
