@@ -141,9 +141,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Film> filmResults = new ArrayList<>();
 		List<Actor> filmCast = new ArrayList<>();
 		Film film=null;
+		int counter=0;
 		
 		// Makes connection to database
-		String sql = "SELECT title, description FROM film WHERE description LIKE ? OR title LIKE ?";
+		String sql = "SELECT id, title, description, release_year, rating FROM film WHERE description LIKE ? OR title LIKE ?";
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
 
@@ -157,28 +158,32 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
-//
-//			int id = rs.getInt("id");
+			
+			counter++;
+			int id = rs.getInt("id");
 		String title = rs.getString("title");
 			String description = rs.getString("description");
-//			Integer releaseYear = rs.getInt("release_year");
+			Integer releaseYear = rs.getInt("release_year");
 //			int languageId = rs.getInt("language_id");
 //			int rentalDuration = rs.getInt("rental_duration");
 //			double rentalRate = rs.getDouble("rental_rate");
 //			Integer length = rs.getInt("length");
 //			double replacementCost = rs.getDouble("replacement_cost");
-//			String rating = rs.getString("rating");
+			String rating = rs.getString("rating");
 //			String specialfeatures = rs.getString("special_features");
 //			filmCast.addAll(filmCast);
 //			film = new Film(id, title, description, releaseYear, languageId, rentalDuration, rentalRate, length,
 //					replacementCost, rating, specialfeatures, filmCast);
 //			
 //			filmResults.add(film);
-			
-			System.out.println("TITLE: "+ title+"DESC"+ description);
-			
-		}
+			System.out.println("-----------------------------------------------------------------------------------------------------------------");
+			System.out.println("|FILM ID: "+id+"|\n\nTITLE:\t"+ title+"\nDESCRIPTION:  "+ description+"\nRELEASE YEAR:  "+releaseYear+" RATING:  "+rating);
+			//System.out.println("------------------------------------------------------------------------------------------------------------------");
 
+		}
+		System.out.println("-----------------------------------------------------------------------------------------------------------------");
+
+			System.out.println("LISTING "+counter+" RESULTS FOR"+ keyword);
 		rs.close();
 		stmt.close();
 		conn.close();
