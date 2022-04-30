@@ -4,17 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Film {
-	
-//	LAB 1.A
-//	Complete the Film class with attributes that map to the columns of the film table.
-//	Use appropriate datatypes and Java naming conventions. Provide getters and setters, and appropriate constructors.
-//	Also add a good toString, and equals and hashCode methods.
-	
-	
-	
 
-	
-	
+
 
 	// film table
 	private int id;// Primary Key //foreign key in actor and language tables
@@ -28,9 +19,9 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String features;
-	private List<Actor> cast;//from actor table
-	private String filmLanguage;//from language table
 	
+	private List<Actor> cast;// holds a list of actors from actor class/table
+	private String filmLanguage;// from language table
 
 	// Default constructor
 	public Film() {
@@ -55,6 +46,18 @@ public class Film {
 		this.features = features;
 		this.cast = cast;
 		this.filmLanguage = filmLanguage;
+	}
+
+	// filmSearch constructor
+	public Film(int id, String title, String description, int year, String rating) {
+
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.releaseYear = year;
+		this.rating = rating;
+
 	}
 
 	public int getId() {
@@ -188,23 +191,11 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "[Film ID]" + id + " [Title] " + title + " [Description] " + description + " [ReleaseYear] " + releaseYear
-				+ " [Language Id] " + languageId + ", [rentalDuration]" + rentalDuration + ", [Rental Rate] " + rentalRate
-				+ " [Length] " + length + " [Replacement Cost]" + replacementCost + ", [Rating] " + rating + " [Features] "
-				+ features + " [Cast]" + cast + " [filmLanguage] " + filmLanguage;
+		return "[Film ID]" + id + " [Title] " + title + " [Description] " + description + " [ReleaseYear] "
+				+ releaseYear + " [Language Id] " + languageId + ", [rentalDuration]" + rentalDuration
+				+ ", [Rental Rate] " + rentalRate + " [Length] " + length + " [Replacement Cost]" + replacementCost
+				+ ", [Rating] " + rating + " [Features] " + features + " [Cast]" + cast + " [filmLanguage] "
+				+ filmLanguage;
 	}
-
-
-	
-
-	
-
-	
-	
-	
-	
-
-	
-	
 
 }
