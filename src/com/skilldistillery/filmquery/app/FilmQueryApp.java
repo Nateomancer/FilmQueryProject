@@ -35,57 +35,72 @@ public class FilmQueryApp {
 		input.close();
 	}
 
-	
-	
 	private void startUserInterface(Scanner input) throws SQLException {
 
-//	  User Story 1
-//	  The user is presented with a menu in which they can choose to:
-//
-//	  Look up a film by its id.
-//	  Look up a film by a search keyword.
-//	  Exit the application.
+//	  User Story 1 DONE
+//	  User Story 2 DONE
+//	  User Story 3
+		
 		boolean menu = true;
-		while (menu==true) {
-			
-			//print interface to the console
-			printInterface();
-			
-			//get user input
+		while (menu == true) {
+
+			// print interface to the console
+			printInterface(input);
+
+			// get user input
 			int userMenuSelection = getUserInput(input);
-			
+
 			switch (userMenuSelection) {
 
 			case 1:
-				
-				//FINDS FILM MATCHING THE ID THE USER ENTERED
-				
+
+				// FINDS FILM MATCHING THE ID THE USER ENTERED
+
 				System.out.println("Please enter film id");
+				input.nextLine();
 				int filmId = input.nextInt();
 				Film film = null;
-				
-				if (filmId>0) {
-				film = db.findFilmById(filmId);
-				System.out.println("1...\n2...\n3... \nQuery Succesful.");
-				System.out.println(film);
-				}else
+
+				if (filmId > 0) {
+					film = db.findFilmById(filmId);
+					System.out.println("1...\n2...\n3... \nQuery Succesful.\n");
+					System.out.println("TITLE: " + film.getTitle() + "\nRELEASE YEAR: " + film.getReleaseYear()
+							+ "\nRating: " + film.getRating() + "\nDESCRIPTION: " + film.getDescription() + "\n");
+					;
+				} else
 					System.out.println("Query matched no results");
 				break;
-				
+
 			case 2:
-				
-				//FINDS FILM MATCHING THE KEYWORD USER ENTERED
+
+				// FINDS FILM MATCHING THE KEYWORD USER ENTERED
+
+				List<Film> filmResults = new ArrayList<>();
+
 				System.out.println("Please enter a search keyword");
-				String keyword = input.nextLine();
-				// CALL METHOD
-				break;
+				input.nextLine();
+				String keyword = input.next();
+				System.out.println(keyword);
+			
+				System.out.println("Printing Results...");
+				db.findFilmByKeyword(keyword);
+				//filmResults.addAll();
+				//System.out.println(filmResults.size());
 				
+				
+//				for (Film films : filmResults) {
+//
+//					System.out.println(films.toString());
+//				}
+
+				break;
+
 			case 3:
-				//EXIT THE PROGRAM
+				// EXIT THE PROGRAM
 				System.out.println("Goodbye");
-				menu=false;
+				menu = false;
 				break;
-				
+
 			default:
 				continue;
 
@@ -94,24 +109,25 @@ public class FilmQueryApp {
 
 	}
 
-	private void printInterface() {
+	private void printInterface(Scanner input) {
 
-		String[] options = { "1- Look up film with film ID 1", "2- Look up film by a search Keyword 2",
-				"3- Exit the application 3" };
+		String[] options = { "1- Look up film with film ID", "2- Look up film by a search Keyword",
+				"3- Exit the application" };
 
 		for (String option : options) {
 			System.out.println(option);
 		}
 
-		System.out.println("Please select an option");
+		System.out.println("\nPlease select an option");
 	}
 
 	private int getUserInput(Scanner input) {
-
+		
+		Scanner input3=input;
 		int userMenuSelection;
-
+		
 		try {
-			userMenuSelection = input.nextInt();
+			userMenuSelection = input3.nextInt();
 			if (userMenuSelection > 3 || userMenuSelection < 1) {
 
 				input.nextLine();
@@ -124,9 +140,6 @@ public class FilmQueryApp {
 		catch (InputMismatchException e) {
 			input.nextLine();
 			System.out.println("CRUD! That was an invalid input \nPlease select an option from the menu");
-			return userMenuSelection = 0;
-
-		} catch (Exception e) {
 			return userMenuSelection = 0;
 
 		}
