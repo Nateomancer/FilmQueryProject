@@ -16,18 +16,32 @@ public class FilmQueryApp {
 
 	DatabaseAccessor db = new DatabaseAccessorObject();
 
-	public static void main(String[] args) throws SQLException {
-		
-		System.out.println("\nTHANKYOU FOR COMING TO THE QUICKSHOP VIDEO RENTAL TERMINAL\n"
-				+ "WE ABADONED BLOCKBUSTER FOR NETLIX, AND NOW NETFLIX IS DYING\n"
-				+ "HOPE YOU LIKE COMMAND PROMPTS\n");
+	public static void main(String[] args) throws SQLException, InterruptedException {
+
+		System.out.println("   " + ""
+				+ " ____  __  ______________ __    _____ __  ______  ____     _    __________  __________     _______________  ____  ______\n"
+				+ "   / __ \\/ / / /  _/ ____/ //_/   / ___// / / / __ \\/ __ \\   | |  / /  _/ __ \\/ ____/ __ \\   / ___/_  __/ __ \\/ __ \\/ ____/\n"
+				+ "  / / / / / / // // /   / ,<      \\__ \\/ /_/ / / / / /_/ /   | | / // // / / / __/ / / / /   \\__ \\ / / / / / / /_/ / __/   \n"
+				+ " / /_/ / /_/ // // /___/ /| |    ___/ / __  / /_/ / ____/    | |/ // // /_/ / /___/ /_/ /   ___/ // / / /_/ / _, _/ /___   \n"
+				+ " \\___\\_\\____/___/\\____/_/ |_|   /____/_/ /_/\\____/_/         |___/___/_____/_____/\\____/   /____//_/  \\____/_/ |_/_____/   \n"
+				+ "                                                                                                                          \n"
+				+ "" + "\n ");
+
+		System.out.println("\n" + "     \t\t\t      ___\n" + "     \t\t\t  _.-|   |          |\\__/,|   (`\\\n"
+				+ "     \t\t\t {   |   |          |o o  |__ _) )\n" + "     \t\t\t   -.|___|        _.( T   )  `  /\n"
+				+ "    \t\t\t   .--'-`-.     _((_ `^--' /_<  \\\n" + "     \t\t\t .+|______|__.-||__)`-'(((/  (((/");
+
+		System.out.println("");
+		Thread.sleep(3000);
 
 		FilmQueryApp app = new FilmQueryApp();
+		app.clear();
 		// app.test();
 		app.launch();
+
 	}
 
-	private void launch() throws SQLException {
+	private void launch() throws SQLException, InterruptedException {
 		Scanner input = new Scanner(System.in);
 
 		startUserInterface(input);
@@ -35,7 +49,7 @@ public class FilmQueryApp {
 		input.close();
 	}
 
-	private void startUserInterface(Scanner input) throws SQLException {
+	private void startUserInterface(Scanner input) throws SQLException, InterruptedException {
 
 		boolean menu = true;
 		while (menu == true) {
@@ -60,6 +74,16 @@ public class FilmQueryApp {
 					input.nextLine();
 					filmId = input.nextInt();
 
+					System.out.println("\n\n\n" + "" + "		  ,-.       _,---._ __   / \\\n"
+							+ "		  /  )    .-'       `./ /   \\\n" + "		 (  (   ,'            `/    /|\n"
+							+ "		  \\  `-\"             \\'\\   / |\n" + "		   `.              ,  \\ \\ /  |\n"
+							+ "		    /`.          ,'-`----Y   |\n" + "		   (            ;        |   '\n"
+							+ "		   |  ,-.    ,-'         |  /\n" + "		   |  | (   |            | /\n"
+							+ "		   )  |  \\  `.___________|/\n" + "		   `--'   `--'");
+
+					System.out.println("Searching...");
+					Thread.sleep(2000);
+
 					// checks user input
 					if (filmId > 0) {
 
@@ -68,7 +92,7 @@ public class FilmQueryApp {
 						// checks if film is null
 						if (film != null) {
 
-							System.out.println("1...\n2...\n3... \nQuery Succesful.\n");
+							System.out.println("\nQuery Succesful.\n");
 
 							// print the film title, year, rating, and description
 							System.out.println("TITLE: " + film.getTitle() + "\nRELEASE YEAR: " + film.getReleaseYear()
@@ -89,18 +113,16 @@ public class FilmQueryApp {
 							System.out.println("");
 
 						} else if (film == null) {
-							System.out.println("NO RESULTS\n"
+							System.out.println("NO RESULTS\n" + "\nOOPS, I nulled again " + "¯\\_(ツ)_/¯");
+							System.out.println("\n");
 
-									+ "\nOOPS, I nulled again,\n" + "I played with your code, got lost in queries\n"
-									+ "Oh user, You think I have everything\n" + "But I'm not that acurate\n"
-
-									+ "That search term didn't have any matches.");
 						}
 
 					}
 				} catch (InputMismatchException e) {
 					input.nextLine();
-					System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again");
+					System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again" + "¯\\_(ツ)_/¯");
+					System.out.println("\n");
 					break;
 				}
 				break;
@@ -112,9 +134,20 @@ public class FilmQueryApp {
 				List<Film> filmResults = new ArrayList<>();
 
 				System.out.println("Please enter a search keyword");
+
 				try {
 					input.nextLine();
 					String keyword = input.next();
+
+					System.out.println("\n\n\n" + "" + "		  ,-.       _,---._ __   / \\\n"
+							+ "		  /  )    .-'       `./ /   \\\n" + "		 (  (   ,'            `/    /|\n"
+							+ "		  \\  `-\"             \\'\\   / |\n" + "		   `.              ,  \\ \\ /  |\n"
+							+ "		    /`.          ,'-`----Y   |\n" + "		   (            ;        |   '\n"
+							+ "		   |  ,-.    ,-'         |  /\n" + "		   |  | (   |            | /\n"
+							+ "		   )  |  \\  `.___________|/\n" + "		   `--'   `--'");
+
+					System.out.println("Searching...");
+					Thread.sleep(2000);
 
 					filmResults.addAll(db.findFilmByKeyword(keyword));
 					int size = filmResults.size();
@@ -136,15 +169,17 @@ public class FilmQueryApp {
 					}
 
 					else if (size == 0) {
-						System.out.println("NO RESULTS\n"
+						System.out.println("\nNO RESULTS\n"
 
-								+ "\nOOPS, I nulled again,\n" + "I played with your code, got lost in queries\n"
-								+ "Oh user, You think I have everything\n" + "But I'm not that acurate\n\n");
+								+ "OOPS, I nulled again,\n" + "¯\\_(ツ)_/¯");
+						System.out.println("");
+
 					}
 
 				} catch (InputMismatchException e) {
 					input.nextLine();
-					System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again\n");
+					System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again\n" + "¯\\_(ツ)_/¯");
+					System.out.println("\n");
 					break;
 				}
 
@@ -152,6 +187,21 @@ public class FilmQueryApp {
 
 			case 3:
 				// EXIT THE PROGRAM
+				System.out.println("\n\n");
+				System.out.println("        *      MMMM8&&&            *\n" + "             MMMMM88&&&&&&    .\n"
+						+ "            MMMMM88&&&&&&&&\n" + "*           MMMM88&&&&&&&&&\n"
+						+ "            MMMM88&&&&&&&&&\n" + "             MMMM88&&&&&&&\n"
+						+ "               MMMMM8&&&      *\n" + " \n" + "  *\n" + "         \n" + "         \n"
+						+ "         \n" + "        |\\___/|\n" + "        )     (             .              '\n"
+						+ "       =\\     /=\n" + "         )===(       *\n" + "        /     \\\n"
+						+ "        |     |\n" + "       /       \\\n" + "       \\       /\n"
+						+ "_/\\_/\\_/\\__  _/_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_\n"
+						+ "|  |  |  |( (  |  |  |  |  |  |  |  |  |  |\n"
+						+ "|  |  |  | ) ) |  |  |  |  |  |  |  |  |  |\n"
+						+ "|  |  |  |(_(  |  |  |  |  |  |  |  |  |  |\n"
+						+ "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |\n"
+						+ "|  |  |  |  |  |  |  |  |  |  |  |  |  |  |");
+
 				System.out.println("Goodbye");
 				menu = false;
 				break;
@@ -165,8 +215,9 @@ public class FilmQueryApp {
 	}
 
 	private void printInterface(Scanner input) {
-		
-		System.out.println("---MAIN MENU---");
+
+		System.out.println(
+				"       	     |\\__/,|   (`\\\n" + "  	   _.|o o  |_   ) )\n" + " ---MENU---(((---(((---------");
 
 		String[] options = { "1- Look up film with film ID", "2- Look up film by a search Keyword",
 				"3- Exit the application" };
@@ -176,6 +227,7 @@ public class FilmQueryApp {
 		}
 
 		System.out.println("\nPlease select an option");
+		System.out.println("\n\n");
 	}
 
 	private int getUserInput(Scanner input) {
@@ -188,7 +240,9 @@ public class FilmQueryApp {
 			if (userMenuSelection > 3 || userMenuSelection < 1) {
 
 				input.nextLine();
-				System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again\n");
+				System.out.println("\nCRUD! That was an invalid Input\n" + "Please try again\n" + "¯\\_(ツ)_/¯");
+				System.out.println("\n");
+
 				return userMenuSelection = 0;
 
 			}
@@ -196,13 +250,19 @@ public class FilmQueryApp {
 
 		catch (InputMismatchException e) {
 
-			System.out.println("\nCRUD! That was an invalid input\n" + "please try again");
+			System.out.println("\nCRUD! That was an invalid input\n" + "please try again\n" + "¯\\_(ツ)_/¯ \n");
 			return userMenuSelection = 0;
 
 		}
 
 		return userMenuSelection;
 
+	}
+
+	public void clear() {
+		for (int i = 0; i < 100; i++) {
+			System.out.println("\n");
+		}
 	}
 
 }
